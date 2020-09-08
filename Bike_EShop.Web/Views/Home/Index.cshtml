@@ -9,6 +9,8 @@
         <h1 class="text-center">Sam's Bikeshop</h1>
     </header>
     <div class="bike-img text-center">
-        <bike-img random-nr="@Model.RandomNr"></bike-img>
+        <a asp-controller="Product" asp-action="Index">
+            <bike-img random-nr="@Model.RandomNr"></bike-img>
+        </a>
     </div>
 </div>
