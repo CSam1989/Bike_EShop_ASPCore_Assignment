@@ -1,8 +1,9 @@
-﻿@{
+﻿@model Bike_EShop.Web.Models.Home.HomeIndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
     Layout = "_LandingPageLayout";
 }
 
 <div class="vertical-align text-center">
-    <bike-img random-nr="2"></bike-img>
+    <bike-img random-nr="@Model.RandomNr"></bike-img>
 </div>
