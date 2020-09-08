@@ -9,7 +9,7 @@ namespace Bike_EShop.TagHelpers.BikeImage
     [HtmlTargetElement(TagHelperNames.BikeImgTagHelper)]
     public class BikeImageTagHelper: TagHelper
     {
-        public int RandomNr { get; set; }
+        public int BikeId { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             if (context == null)
@@ -20,7 +20,7 @@ namespace Bike_EShop.TagHelpers.BikeImage
 
             output.TagName = "img";
             output.Content.SetHtmlContent(
-                $"<img src=\"../images/bikes/bike{RandomNr}.png\" alt=\"Image of a bike\"/>"
+                $"<img src=\"../images/bikes/bike{BikeId}.png\" alt=\"Image of a bike\"/>"
             );
         }
     }
