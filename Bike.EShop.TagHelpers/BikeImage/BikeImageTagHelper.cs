@@ -20,7 +20,7 @@ namespace Bike.EShop.TagHelpers.BikeImage
 
             output.TagName = "img";
             output.Content.SetHtmlContent(
-                $"<img src=\"../images/bikes/bike{RandomNr}.jpg\" alt=\"Image of a bike\"/>"
+                $"<img src=\"../images/bikes/bike{RandomNr}.png\" alt=\"Image of a bike\"/>"
             );
         }
     }
