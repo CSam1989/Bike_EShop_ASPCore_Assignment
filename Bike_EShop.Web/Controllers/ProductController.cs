@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bike_EShop.Application.Products.Queries.GetProducts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bike_EShop.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await Mediator.Send(new GetProductsQuery()));
         }
     }
 }
