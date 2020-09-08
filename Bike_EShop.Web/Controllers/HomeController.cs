@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Bike_EShop.Web.Models;
 using Bike_EShop.Application.Common.Interfaces;
-using System.IO;
 using Bike_EShop.Web.Models.Home;
 
 namespace Bike_EShop.Web.Controllers
@@ -16,20 +15,23 @@ namespace Bike_EShop.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRandomGeneratorService _randomGenerator;
+        private readonly IBikeCountService _bikeCount;
 
         public HomeController(
             ILogger<HomeController> logger,
-            IRandomGeneratorService randomGenerator)
+            IRandomGeneratorService randomGenerator,
+            IBikeCountService bikeCount)
         {
             _logger = logger;
             this._randomGenerator = randomGenerator;
+            this._bikeCount = bikeCount;
         }
 
         public IActionResult Index()
         {
             var vm = new HomeIndexViewModel()
             {
-                RandomNr = _randomGenerator.GenerateRandomNumber(Directory.GetFiles("./wwwroot/images/bikes").Length)
+                RandomNr = _randomGenerator.GenerateRandomNumber(_bikeCount.Count())
             };
 
             return View(vm);

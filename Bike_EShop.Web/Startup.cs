@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Extensions;
+using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Web.Common.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,7 +26,11 @@ namespace Bike_EShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Adds services container made in Application Project
             services.AddApplication();
+
+            //Adds DI to IOC Container
+            services.AddTransient<IBikeCountService, BikeCountService>();
 
             services.AddControllersWithViews();
         }
