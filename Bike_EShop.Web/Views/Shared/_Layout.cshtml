@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sam's BikeShop</title>
-    <link rel="icon" href="./images/logo/favicon.ico" type="image/png" />
+    <link rel="icon" href="~/images/logo/favicon.ico" type="image/png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
+    <header class="mb-3">
         <nav class="navbar">
             <div class="d-flex justify-content-between w-100">
                 <a asp-controller="Home" asp-action="Index">
@@ -23,7 +23,7 @@
                 </a>
             </div>
         </nav>
-        <img src="./images/productpage/bikes_productpage_1024.jpg" alt="photo of bike shop"/>
+        <img src="~/images/productpage/bikes_productpage_1024.jpg" alt="photo of bike shop"/>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

@@ -54,15 +54,29 @@ body {
 
 .navbar {
     background-color: darkblue;
-    color: #664725;
+    color: lightyellow;
 }
 
-.navbar a:visited {
-    background-color: darkblue;
-    color: #664725;
-}
+    .navbar a:visited {
+        background-color: darkblue;
+        color: lightyellow;
+    }
 
 header > img {
     width: 100%;
     max-height: 20vh;
+}
+
+.btn-product {
+    background-color: lightyellow;
+}
+    .btn-product:hover {
+        opacity: 0.7;
+        transform: scale(1.2, 1.2);
+        transition-duration: 500ms;
+        transition-timing-function: ease-out;
+    }
+
+.card {
+    border-radius: 15px;
 }

@@ -13,5 +13,10 @@ namespace Bike_EShop.Web.Controllers
         {
             return View(await Mediator.Send(new GetProductsQuery()));
         }
+
+        public IActionResult Detail()
+        {
+            return View();
+        }
     }
 }
