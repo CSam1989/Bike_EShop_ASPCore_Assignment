@@ -4,6 +4,11 @@
     Layout = "_LandingPageLayout";
 }
 
-<div class="vertical-align text-center">
-    <bike-img random-nr="@Model.RandomNr"></bike-img>
+<div class="d-flex flex-column w-100">
+    <header>
+        <h1 class="text-center">Sam's Bikeshop</h1>
+    </header>
+    <div class="bike-img text-center">
+        <bike-img random-nr="@Model.RandomNr"></bike-img>
+    </div>
 </div>
