@@ -1,10 +1,10 @@
-﻿using Bike.EShop.TagHelpers.NameConsts;
+﻿using Bike_EShop.TagHelpers.NameConsts;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bike.EShop.TagHelpers.BikeImage
+namespace Bike_EShop.TagHelpers.BikeImage
 {
     [HtmlTargetElement(TagHelperNames.BikeImgTagHelper)]
     public class BikeImageTagHelper: TagHelper

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bike.EShop.TagHelpers.NameConsts
+namespace Bike_EShop.TagHelpers.NameConsts
 {
     public static class TagHelperNames
     {

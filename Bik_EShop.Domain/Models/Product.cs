@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bik_EShop.Domain.Models
+namespace Bike_EShop.Domain.Models
 {
     public class Product
     {
