@@ -9,8 +9,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Bik_EShop.Domain\Bike_EShop.Domain.csproj" />
-  </ItemGroup>
-
 </Project>
