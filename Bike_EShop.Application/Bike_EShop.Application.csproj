@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bik_EShop.Domain\Bik_EShop.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
