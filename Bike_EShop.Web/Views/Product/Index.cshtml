@@ -3,11 +3,13 @@
     ViewData["Title"] = "Index";
 }
 
+<partial name="_Pagination" model="@Model.Pagination" />
+
 <div class="row">
     @if (Model.List.Count() == 0)
     {
         <h5>No products</h5>
-    } 
+    }
 
     @foreach (var product in Model.List)
     {
