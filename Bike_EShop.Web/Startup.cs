@@ -6,6 +6,7 @@ using Bike_EShop.Application.Common.Extensions;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Infrastructure.Extensions;
 using Bike_EShop.Web.Common.Services;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,7 +35,8 @@ namespace Bike_EShop.Web
             //Adds DI to IOC Container
             services.AddTransient<IBikeCountService, BikeCountService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
