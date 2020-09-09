@@ -4,14 +4,16 @@ using Bike_EShop.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bike_EShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200909100623_LinkedProductAndShoppingBagTroughShoppingItems")]
+    partial class LinkedProductAndShoppingBagTroughShoppingItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,15 +69,10 @@ namespace Bike_EShop.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("ShoppingBags");
                 });
@@ -105,15 +102,6 @@ namespace Bike_EShop.Infrastructure.Migrations
                     b.ToTable("ShoppingItems");
                 });
 
-            modelBuilder.Entity("Bike_EShop.Domain.Entities.ShoppingBag", b =>
-                {
-                    b.HasOne("Bike_EShop.Domain.Entities.Customer", "Customer")
-                        .WithMany("Bags")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Bike_EShop.Domain.Entities.ShoppingItem", b =>
                 {
                     b.HasOne("Bike_EShop.Domain.Entities.Product", "Product")
@@ -122,8 +110,8 @@ namespace Bike_EShop.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bike_EShop.Domain.Entities.ShoppingBag", "Bag")
-                        .WithMany("Items")
+                    b.HasOne("Bike_EShop.Domain.Entities.ShoppingBag", "ShoppingBag")
+                        .WithMany("ShoppingItems")
                         .HasForeignKey("ShoppingBagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

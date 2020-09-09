@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Configurations\" />
+    <Compile Remove="Migrations\20200909095304_test.cs" />
+    <Compile Remove="Migrations\20200909095304_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
