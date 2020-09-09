@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Bike_EShop.Application.Common.Extensions
 {
-    public static class DependencyInjection
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
