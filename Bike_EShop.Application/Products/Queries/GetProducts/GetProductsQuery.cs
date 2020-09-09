@@ -1,6 +1,12 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Bike_EShop.Application.Common.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,37 +17,22 @@ namespace Bike_EShop.Application.Products.Queries.GetProducts
     {
         public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, ProductsVM>
         {
+            private readonly IApplicationDbContext _context;
+            private readonly IMapper _mapper;
+
+            public GetProductsQueryHandler(IApplicationDbContext context, IMapper mapper)
+            {
+                this._context = context;
+                this._mapper = mapper;
+            }
+
             public async Task<ProductsVM> Handle(GetProductsQuery request, CancellationToken cancellationToken)
             {
                 var vm = new ProductsVM
                 {
-                    List = new List<ProductsDto>
-                    {
-                        new ProductsDto
-                        {
-                            Id = 1,
-                            Name= "Bike 1",
-                            Price= 1000m
-                        },
-                        new ProductsDto
-                        {
-                            Id = 2,
-                            Name= "Bike 2",
-                            Price= 1250m
-                        },
-                        new ProductsDto
-                        {
-                            Id = 3,
-                            Name= "Bike 3",
-                            Price= 1500m
-                        },
-                        new ProductsDto
-                        {
-                            Id = 4,
-                            Name= "Bike 4",
-                            Price= 750m
-                        }
-                    }
+                    List = await _context.Products
+                                .ProjectTo<ProductsDto>(_mapper.ConfigurationProvider)
+                                .ToListAsync(cancellationToken)
                 };
 
                 return vm;

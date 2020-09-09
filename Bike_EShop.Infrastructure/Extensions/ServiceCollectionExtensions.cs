@@ -1,4 +1,5 @@
-﻿using Bike_EShop.Infrastructure.Persistence;
+﻿using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ namespace Bike_EShop.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddDbContext<ApplicationDbContext>(opt => opt
             .UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),

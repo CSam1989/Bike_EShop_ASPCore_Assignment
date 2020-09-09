@@ -1,4 +1,5 @@
-﻿using Bike_EShop.Application.Common.Interfaces;
+﻿using AutoMapper;
+using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace Bike_EShop.Application.Common.Extensions
         {
             services.AddTransient<IRandomGeneratorService, RandomGeneratorService>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             return services;

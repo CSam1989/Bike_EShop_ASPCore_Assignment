@@ -1,4 +1,5 @@
-﻿using Bike_EShop.Domain.Entities;
+﻿using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Bike_EShop.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(
             DbContextOptions options)
