@@ -1,4 +1,6 @@
-﻿using Bike_EShop.Application.Common.Mappings;
+﻿using AutoMapper;
+using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Application.Common.Mappings;
 using Bike_EShop.Domain.Entities;
 using System;
 using System.Collections.Generic;

@@ -11,7 +11,7 @@
 
     @foreach (var product in Model.List)
     {
-        <p-card id="product.Id" name="product.Name" price="product.Price"></p-card>
+        <p-card id="product.Id" name="@product.Name" price="product.Price" bike-nr="product.BikeNr"></p-card>
     }
 </div>
 

@@ -19,11 +19,19 @@ namespace Bike_EShop.Application.Products.Queries.GetProducts
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
+            private readonly IRandomGeneratorService _randomGenerator;
+            private readonly IBikeCountService _bikeCount;
 
-            public GetProductsQueryHandler(IApplicationDbContext context, IMapper mapper)
+            public GetProductsQueryHandler(
+                IApplicationDbContext context, 
+                IMapper mapper,
+                IRandomGeneratorService randomGenerator,
+                IBikeCountService bikeCount)
             {
                 this._context = context;
                 this._mapper = mapper;
+                this._randomGenerator = randomGenerator;
+                this._bikeCount = bikeCount;
             }
 
             public async Task<ProductsVM> Handle(GetProductsQuery request, CancellationToken cancellationToken)
@@ -34,6 +42,11 @@ namespace Bike_EShop.Application.Products.Queries.GetProducts
                                 .ProjectTo<ProductsDto>(_mapper.ConfigurationProvider)
                                 .ToListAsync(cancellationToken)
                 };
+
+                foreach (var product in vm.List)
+                {
+                    product.BikeNr = _randomGenerator.GenerateRandomNumber(_bikeCount.Count());
+                }
 
                 return vm;
             }
