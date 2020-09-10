@@ -14,8 +14,8 @@ namespace Bike_EShop.Application.Products.Commands.Create
                 .NotEmpty().WithMessage("Name is required");
 
             RuleFor(p => p.Price)
-                .GreaterThanOrEqualTo(0)
-                .WithMessage("Price can't be negative");
+                .GreaterThanOrEqualTo(0).WithMessage("Price can't be negative")
+                .NotEmpty().WithMessage("Price is required"); ;
         }
     }
 }

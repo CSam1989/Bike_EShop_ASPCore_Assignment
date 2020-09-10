@@ -11,7 +11,7 @@ namespace Bike_EShop.Web.Controllers
 {
     public class ProductController : BaseController
     {
-        // GET: Products
+        // GET: Product
         public async Task<IActionResult> Index(int? currentPage)
         {
             return View(await Mediator.Send(new GetProductsQuery()
@@ -20,12 +20,23 @@ namespace Bike_EShop.Web.Controllers
             }));
         }
 
-        // GET: Products/Detail/:id
+        // GET: Product/Detail/:id
         public IActionResult Detail()
         {
             return View();
         }
 
+        // GET: Admin/Product
+        [HttpGet("Admin/Product")]
+        public async Task<IActionResult> AdminIndex(int? currentPage)
+        {
+            return View(await Mediator.Send(new GetProductsQuery()
+            {
+                CurrentPage = currentPage
+            }));
+        }
+
+        [HttpGet("Admin/Product/Create")]
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -39,7 +50,7 @@ namespace Bike_EShop.Web.Controllers
             if (ModelState.IsValid)
             {
                 var productId = await Mediator.Send(command);
-                return RedirectToAction(nameof(Index), productId);
+                return RedirectToAction(nameof(AdminIndex), productId);
             }
 
             return View(command);

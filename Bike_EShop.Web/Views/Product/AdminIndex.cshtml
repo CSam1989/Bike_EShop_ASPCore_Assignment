@@ -1,0 +1,54 @@
+﻿@model Bike_EShop.Application.Products.Queries.GetProducts.ProductsVM;
+
+@{
+    ViewData["Title"] = "Admin Overview";
+}
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-secondary">
+        <i class="fas fa-plus-square"></i>
+    </a>
+</div>
+
+@if (Model.List.Count() == 0)
+{
+    <h5>No products</h5>
+}
+else
+{
+    <table class="table col-12 table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.List.First().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.List.First().Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.List)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@product.Id">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary" asp-action="Delete" asp-route-id="@product.Id">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pagination" , model="@Model.Pagination" />
+}

@@ -80,3 +80,7 @@ header > img {
 .card {
     border-radius: 15px;
 }
+
+.pointer {
+   cursor: pointer; 
+}
