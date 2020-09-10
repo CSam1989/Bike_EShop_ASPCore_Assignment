@@ -30,7 +30,7 @@ namespace Bike_EShop.TagHelpers.ProductCard
                 "<div class=\"card-body text-center\">" +
                 $"<h5 class=\"card-title\">{Name.ToUpper()}</h5>" +
                 $"<p class=\"card-text\">{Price.ToString("C")}</p>" +
-                $"<a href=\"/Product/Detail/{Id}\" class=\"btn btn-product\">Add to Cart</a>" +
+                $"<a href=\"/Product/Detail/{Id}/{BikeNr}\" class=\"btn btn-product\">Add to Cart</a>" +
                 "</div>" +
                 "</div>" +
                 "</div>"

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Bike_EShop.Domain\Bike_EShop.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
 </Project>

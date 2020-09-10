@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Bike_EShop.Application.Common.Exceptions;
-using Bike_EShop.Application.Common.Models;
+using Bike_EShop.Application.Common.Extensions;
 using Bike_EShop.Application.Products.Commands.Delete;
 using Bike_EShop.Application.Products.Commands.Upsert;
 using Bike_EShop.Application.Products.Queries.GetProductById;
 using Bike_EShop.Application.Products.Queries.GetProducts;
+using Bike_EShop.Application.ShoppingItems.Commands.Create;
+using Bike_EShop.Domain.Entities;
+using Bike_EShop.Web.Models.Product;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Bike_EShop.Web.Controllers
 {
@@ -25,11 +27,17 @@ namespace Bike_EShop.Web.Controllers
         }
 
         // GET: Product/Detail/1
-        [HttpGet("Product/Detail/{id}")]
-        public async Task<IActionResult> Detail(int id)
+        [HttpGet("Product/Detail/{id}/{bikeNr}")]
+        public async Task<IActionResult> Detail(int id, int bikeNr)
         {
             var query = await Mediator.Send(new GetProductByIdQuery { Id = id });
-            return View();
+
+            return View(new ProductDetailViewModel 
+            { 
+                Product = query.Product,
+                Quantity = 1,
+                BikeNr = bikeNr
+            });
         }
 
         // GET: Admin/Product

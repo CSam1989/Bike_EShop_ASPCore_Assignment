@@ -34,6 +34,9 @@ namespace Bike_EShop.Web
 
             //Adds DI to IOC Container
             services.AddTransient<IBikeCountService, BikeCountService>();
+            services.AddTransient<IBagSessionService, BagSessionService>();
+
+            services.AddSession();
 
             services.AddControllersWithViews()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());
@@ -54,7 +57,7 @@ namespace Bike_EShop.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
