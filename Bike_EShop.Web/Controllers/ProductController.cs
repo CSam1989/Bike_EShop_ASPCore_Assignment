@@ -24,9 +24,11 @@ namespace Bike_EShop.Web.Controllers
             }));
         }
 
-        // GET: Product/Detail/:id
-        public IActionResult Detail()
+        // GET: Product/Detail/1
+        [HttpGet("Product/Detail/{id}")]
+        public async Task<IActionResult> Detail(int id)
         {
+            var query = await Mediator.Send(new GetProductByIdQuery { Id = id });
             return View();
         }
 
@@ -40,8 +42,8 @@ namespace Bike_EShop.Web.Controllers
             }));
         }
 
-        [HttpGet("Admin/Product/Create")]
         // GET: Admin/Product/Create
+        [HttpGet("Admin/Product/Create")]
         public IActionResult Create()
         {
             return View(new UpsertProductCommand());
@@ -59,9 +61,9 @@ namespace Bike_EShop.Web.Controllers
 
             return View(nameof(Create), command);
         }
-
-        [HttpGet("Admin/Product/Update/{id}")]
+        
         // GET: Admin/Product/Update/1
+        [HttpGet("Admin/Product/Update/{id}")]
         public async Task<IActionResult> Update(int id)
         {
             var query = await Mediator.Send(new GetProductByIdQuery { Id = id });
