@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bike_EShop.Application.Products.Commands.Create
+namespace Bike_EShop.Application.Products.Commands.Upsert
 {
-    public class CreateProductCommandValidator: AbstractValidator<CreateProductCommand>
+    public class UpsertProductCommandValidator: AbstractValidator<UpsertProductCommand>
     {
-        public CreateProductCommandValidator()
+        public UpsertProductCommandValidator()
         {
             RuleFor(p => p.Name)
                 .MaximumLength(50).WithMessage("Name max 50 characters")
