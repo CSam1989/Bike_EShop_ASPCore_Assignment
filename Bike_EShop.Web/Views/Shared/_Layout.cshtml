@@ -3,31 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Bike_EShop.Web</title>
+    <title>@ViewData["Title"] - Sam's BikeShop</title>
+    <link rel="icon" href="~/images/logo/favicon.ico" type="image/png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bike_EShop.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="mb-3">
+        <nav class="navbar">
+            <div class="d-flex justify-content-between w-100">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-bicycle fa-3x"></i>
+                </a>
+                <a class="nav-link d-flex">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                    <h5>
+                        <span class="badge ml-1">0</span>
+                    </h5>
+                </a>
             </div>
         </nav>
+        <img src="~/images/productpage/bikes_productpage_1024.jpg" alt="photo of bike shop"/>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -37,9 +33,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Bike_EShop.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Sam's Bikeshop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="https://kit.fontawesome.com/064c0b8681.js" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

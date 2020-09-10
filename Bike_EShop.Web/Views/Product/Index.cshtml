@@ -1,0 +1,17 @@
+﻿@model Bike_EShop.Application.Products.Queries.GetProducts.ProductsVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    @if (Model.List.Count() == 0)
+    {
+        <h5>No products</h5>
+    } 
+
+    @foreach (var product in Model.List)
+    {
+        <p-card id="product.Id" name="product.Name" price="product.Price"></p-card>
+    }
+</div>
+

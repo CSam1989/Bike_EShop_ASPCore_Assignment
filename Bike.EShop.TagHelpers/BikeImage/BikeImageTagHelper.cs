@@ -1,15 +1,15 @@
-﻿using Bike.EShop.TagHelpers.NameConsts;
+﻿using Bike_EShop.TagHelpers.NameConsts;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bike.EShop.TagHelpers.BikeImage
+namespace Bike_EShop.TagHelpers.BikeImage
 {
     [HtmlTargetElement(TagHelperNames.BikeImgTagHelper)]
     public class BikeImageTagHelper: TagHelper
     {
-        public int RandomNr { get; set; }
+        public int BikeId { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             if (context == null)
@@ -20,7 +20,7 @@ namespace Bike.EShop.TagHelpers.BikeImage
 
             output.TagName = "img";
             output.Content.SetHtmlContent(
-                $"<img src=\"../images/bikes/bike{RandomNr}.jpg\" alt=\"Image of a bike\"/>"
+                $"<img src=\"../images/bikes/bike{BikeId}.png\" alt=\"Image of a bike\"/>"
             );
         }
     }

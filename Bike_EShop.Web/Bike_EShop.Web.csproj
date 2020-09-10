@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bike.EShop.TagHelpers\Bike.EShop.TagHelpers.csproj" />
+    <ProjectReference Include="..\Bike.EShop.TagHelpers\Bike_EShop.TagHelpers.csproj" />
     <ProjectReference Include="..\Bike_EShop.Application\Bike_EShop.Application.csproj" />
-    <ProjectReference Include="..\Bike_EShop.Infrastructure\Bike_EShop.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
 </Project>
