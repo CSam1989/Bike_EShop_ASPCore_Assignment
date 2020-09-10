@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bike_EShop.Application.Common.Exceptions;
 using Bike_EShop.Application.Common.Models;
 using Bike_EShop.Application.Products.Commands.Create;
+using Bike_EShop.Application.Products.Commands.Delete;
 using Bike_EShop.Application.Products.Queries.GetProducts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,15 +39,15 @@ namespace Bike_EShop.Web.Controllers
         }
 
         [HttpGet("Admin/Product/Create")]
-        // GET: Products/Create
+        // GET: Product/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new CreateProductCommand());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price")] CreateProductCommand command)
+        public async Task<IActionResult> CreateSave([Bind("Name,Price")] CreateProductCommand command)
         {
             if (ModelState.IsValid)
             {
@@ -53,7 +55,23 @@ namespace Bike_EShop.Web.Controllers
                 return RedirectToAction(nameof(AdminIndex), productId);
             }
 
-            return View(command);
+            return View(nameof(Create), command);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await Mediator.Send(new DeleteProductCommand { Id = id });
+                return RedirectToAction(nameof(AdminIndex));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

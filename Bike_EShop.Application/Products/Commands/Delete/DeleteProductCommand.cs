@@ -25,7 +25,7 @@ namespace Bike_EShop.Application.Products.Commands.Delete
             }
             public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Products.FindAsync(request.Id, cancellationToken);
+                var entity = await _context.Products.FindAsync(new object[] { request.Id }, cancellationToken);
 
                 if (entity is null)
                     throw new NotFoundException(nameof(Product), request.Id);
