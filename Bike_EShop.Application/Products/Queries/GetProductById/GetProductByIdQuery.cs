@@ -28,7 +28,7 @@ namespace Bike_EShop.Application.Products.Queries.GetProductById
 
             public async Task<ProductByIdVM> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
             {
-                var product = await _context.Products.FindAsync(request.Id, cancellationToken);
+                var product = await _context.Products.FindAsync(new object[] { request.Id }, cancellationToken);
 
                 if (product is null)
                     throw new NotFoundException(nameof(Product), request.Id);

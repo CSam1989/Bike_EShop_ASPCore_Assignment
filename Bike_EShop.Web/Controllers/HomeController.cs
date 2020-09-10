@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Bike_EShop.Web.Models;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Web.Models.Home;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Bike_EShop.Web.Controllers
 {

@@ -39,7 +39,7 @@ else
                         @Html.DisplayFor(modelItem => product.Price)
                     </td>
                     <td class="d-flex justify-content-end">
-                        <a type="submit" class="btn btn-secondary mr-1" asp-action="Edit" asp-route-id="@product.Id">
+                        <a type="submit" class="btn btn-secondary mr-1" asp-action="Update" asp-route-id="@product.Id">
                             <i class="fas fa-edit"></i>
                         </a>
                         <form asp-action="Delete" asp-route-id="@product.Id">

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Exceptions;
 using Bike_EShop.Application.Common.Models;
-using Bike_EShop.Application.Products.Commands.Create;
 using Bike_EShop.Application.Products.Commands.Delete;
+using Bike_EShop.Application.Products.Commands.Upsert;
+using Bike_EShop.Application.Products.Queries.GetProductById;
 using Bike_EShop.Application.Products.Queries.GetProducts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Bike_EShop.Web.Controllers
 {
@@ -39,39 +41,60 @@ namespace Bike_EShop.Web.Controllers
         }
 
         [HttpGet("Admin/Product/Create")]
-        // GET: Product/Create
+        // GET: Admin/Product/Create
         public IActionResult Create()
         {
-            return View(new CreateProductCommand());
+            return View(new UpsertProductCommand());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSave([Bind("Name,Price")] CreateProductCommand command)
+        public async Task<IActionResult> SaveCreate([Bind("Name,Price")] UpsertProductCommand command)
         {
+            if (ModelState.IsValid)
+            {
+                await Mediator.Send(command);
+                return RedirectToAction(nameof(AdminIndex));
+            }
+
+            return View(nameof(Create), command);
+        }
+
+        [HttpGet("Admin/Product/Update/{id}")]
+        // GET: Admin/Product/Update/1
+        public async Task<IActionResult> Update(int id)
+        {
+            var query = await Mediator.Send(new GetProductByIdQuery { Id = id });
+            return View(new UpsertProductCommand
+            {
+                Id = query.Product.Id,
+                Name = query.Product.Name,
+                Price = query.Product.Price
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveUpdate(int id, [Bind("Id,Name,Price")] UpsertProductCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+
             if (ModelState.IsValid)
             {
                 var productId = await Mediator.Send(command);
                 return RedirectToAction(nameof(AdminIndex), productId);
             }
 
-            return View(nameof(Create), command);
+            return View(nameof(Update), command);
         }
 
         [HttpPost]
-        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await Mediator.Send(new DeleteProductCommand { Id = id });
-                return RedirectToAction(nameof(AdminIndex));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            await Mediator.Send(new DeleteProductCommand { Id = id });
+            return RedirectToAction(nameof(AdminIndex));
         }
     }
 }
