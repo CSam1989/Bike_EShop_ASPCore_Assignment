@@ -26,7 +26,7 @@ namespace Bike_EShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await Mediator.Send(new CreateShoppingItemCommand
+                await Mediator.Send(new UpsertShoppingItemCommand
                 {
                     ProductId = vm.Product.Id,
                     BagId = await _bagSession.RetrieveBagIdFromSession(),
