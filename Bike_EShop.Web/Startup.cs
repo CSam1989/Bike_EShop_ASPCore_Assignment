@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Extensions;
 using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Infrastructure.Extensions;
 using Bike_EShop.Web.Common.Services;
+using Bike_EShop.Web.Models.Product;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,13 +29,22 @@ namespace Bike_EShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Adds services container made in Application Project
+            //Adds services container made in Application & Infrastructure Project
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
 
             //Adds DI to IOC Container
             services.AddTransient<IBikeCountService, BikeCountService>();
+            services.AddTransient<IBagSessionService, BagSessionService>();
 
-            services.AddControllersWithViews();
+            services.AddSession();
+
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv => 
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>();
+                    fv.RegisterValidatorsFromAssemblyContaining<ProductDetailViewModelValidator>();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +62,7 @@ namespace Bike_EShop.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

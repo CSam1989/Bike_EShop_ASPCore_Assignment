@@ -1,5 +1,7 @@
-﻿using Bike_EShop.Application.Common.Interfaces;
+﻿using AutoMapper;
+using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Services;
+using Bike_EShop.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -9,12 +11,14 @@ using System.Text;
 
 namespace Bike_EShop.Application.Common.Extensions
 {
-    public static class DependencyInjection
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IRandomGeneratorService, RandomGeneratorService>();
+            services.AddTransient(typeof(IPaginationService<>), typeof(PaginationService<>));
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             return services;
