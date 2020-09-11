@@ -34,8 +34,8 @@ namespace Bike_EShop.Web.Controllers
                 });
                 return RedirectToAction("Index", "Product");
             }
-
-            return View("Product/Detail", vm);
+            
+            return RedirectToAction("Detail", "Product", new { id= vm.Product.Id, bikeNr= vm.BikeNr });
         }
     }
 }

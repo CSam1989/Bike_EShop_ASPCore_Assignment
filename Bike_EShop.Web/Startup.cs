@@ -6,6 +6,7 @@ using Bike_EShop.Application.Common.Extensions;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Infrastructure.Extensions;
 using Bike_EShop.Web.Common.Services;
+using Bike_EShop.Web.Models.Product;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +40,11 @@ namespace Bike_EShop.Web
             services.AddSession();
 
             services.AddControllersWithViews()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());
+                .AddFluentValidation(fv => 
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>();
+                    fv.RegisterValidatorsFromAssemblyContaining<ProductDetailViewModelValidator>();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

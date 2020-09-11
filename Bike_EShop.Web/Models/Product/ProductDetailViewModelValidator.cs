@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Bike_EShop.Application.ShoppingItems.Commands.Create
+namespace Bike_EShop.Web.Models.Product
 {
-    public class CreateShoppingItemCommandValidator: AbstractValidator<CreateShoppingItemCommand>
+    public class ProductDetailViewModelValidator: AbstractValidator<ProductDetailViewModel>
     {
-        public CreateShoppingItemCommandValidator()
+        public ProductDetailViewModelValidator()
         {
             RuleFor(s => s.Quantity)
                 .GreaterThanOrEqualTo(0).WithMessage("Quantity can't be negative")

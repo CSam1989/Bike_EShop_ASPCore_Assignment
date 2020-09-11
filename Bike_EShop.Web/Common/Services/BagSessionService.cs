@@ -35,5 +35,10 @@ namespace Bike_EShop.Web.Common.Services
 
             return int.Parse(bagId);
         }
+
+        public void ClearBag()
+        {
+            _accessor.HttpContext.Session.Clear();
+        }
     }
 }
