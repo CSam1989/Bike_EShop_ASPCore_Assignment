@@ -8,13 +8,14 @@ using Bike_EShop.Application.Products.Commands.Delete;
 using Bike_EShop.Application.Products.Commands.Upsert;
 using Bike_EShop.Application.Products.Queries.GetProductById;
 using Bike_EShop.Application.Products.Queries.GetProducts;
-using Bike_EShop.Application.ShoppingItems.Commands.Create;
 using Bike_EShop.Domain.Entities;
 using Bike_EShop.Web.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bike_EShop.Web.Controllers
 {
+    [Authorize]
     public class ProductController : BaseController
     {
         // GET: Product

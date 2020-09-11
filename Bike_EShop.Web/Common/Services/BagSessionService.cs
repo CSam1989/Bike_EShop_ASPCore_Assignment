@@ -27,8 +27,13 @@ namespace Bike_EShop.Web.Common.Services
 
             if (bagId is null)
             {
+                var user = _accessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
                 //CustomerId wordt nog aangepast van zodra Identity Authentication is ingevoerd
-                var id = await _mediator.Send(new CreateShoppingBagCommand { CustomerId = 1});
+                var id = await _mediator.Send(new CreateShoppingBagCommand 
+                { 
+                    CustomerId = 1
+                });
+
                 bagId = id.ToString();
                 _accessor.HttpContext.Session.SetObjectAsJson("bagId", bagId);
             }
