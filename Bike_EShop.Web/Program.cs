@@ -23,7 +23,8 @@ namespace Bike_EShop.Web
             try
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
-                DbInitializer.Seed(context);
+                DbInitializer.SeedProducts(context);
+                DbInitializer.SeedCustomer(context);
             }
             catch (Exception ex)
             {
