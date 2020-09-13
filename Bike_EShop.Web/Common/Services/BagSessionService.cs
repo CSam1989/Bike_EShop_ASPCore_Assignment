@@ -25,21 +25,29 @@ namespace Bike_EShop.Web.Common.Services
 
         public async Task<int> RetrieveBagIdFromSession()
         {
-            var bagId = _accessor.HttpContext.Session.GetObjectFromJson<string>("bagId");
+            if (BagIdExistsInSession())
+                return int.Parse(_getBadIdfromSession());
 
-            if (!(bagId is null)) 
-                return int.Parse(bagId);
-
-            bagId = await _createShoppingBag();
+            var bagId = await _createShoppingBag();
 
             _accessor.HttpContext.Session.SetObjectAsJson("bagId", bagId);
 
             return int.Parse(bagId);
         }
 
+        public bool BagIdExistsInSession()
+        {
+            return !(_getBadIdfromSession() is null);
+        }
+
         public void ClearBag()
         {
             _accessor.HttpContext.Session.Clear();
+        }
+
+        private string _getBadIdfromSession()
+        {
+            return _accessor.HttpContext.Session.GetObjectFromJson<string>("bagId");
         }
 
         private async Task<string> _createShoppingBag()

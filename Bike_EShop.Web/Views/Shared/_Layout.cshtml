@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Bike_EShop.Application.Common.Interfaces
+@inject IBagSessionService bagSession
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,12 +21,13 @@
                 <div class="d-flex">
                     <partial name="_LoginPartial" />
                     <a class="nav-link d-flex" asp-controller="ShoppingBag" asp-action="Index">
-                        <i class="fas fa-shopping-cart fa-2x"></i>
+                            <i class="fas fa-shopping-cart fa-2x"></i>
                     </a>
+
                 </div>
             </div>
         </nav>
-        <img src="~/images/productpage/bikes_productpage_1024.jpg" alt="photo of bike shop"/>
+        <img src="~/images/productpage/bikes_productpage_1024.jpg" alt="photo of bike shop" />
     </header>
     <div class="container">
         <main role="main" class="pb-3">
