@@ -1,6 +1,5 @@
 ﻿using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Domain.Entities;
-using Bike_EShop.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bike_EShop.Domain.Identity;
 
 namespace Bike_EShop.Infrastructure.Persistence
 {

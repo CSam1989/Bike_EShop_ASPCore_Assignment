@@ -1,5 +1,4 @@
 ﻿using System;
-using Bike_EShop.Infrastructure.Identity;
 using Bike_EShop.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
