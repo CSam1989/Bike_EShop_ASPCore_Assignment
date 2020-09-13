@@ -17,8 +17,6 @@ namespace Bike_EShop.Infrastructure.Data
 {
     public static class DbInitializer
     {
-        private const string Email = "Admin@example.com";
-
         public static async Task SeedProducts(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
@@ -44,22 +42,21 @@ namespace Bike_EShop.Infrastructure.Data
 
             context.Database.EnsureCreated();
 
-            if (await context.Customers.AnyAsync(c => c.Name.ToLower() =="admin"))
+            if (await context.Customers.AnyAsync(c => String.Equals(c.Name, Admin.Name, StringComparison.CurrentCultureIgnoreCase)))
                 return; //Als customers een admin bevat, dan moet de db niet geseed worden
 
             var user = new ApplicationUser
             {
-                UserName = "Admin",
-                Email = Email,
+                UserName = Admin.Name,
+                Email = Admin.Email,
                 Customer = new Customer
                 {
-                    FirstName = "",
-                    Name = "Admin"
+                    FirstName = string.Empty,
+                    Name = Admin.Name
                 }
             };
-            const string password = "Admin123*";
 
-            var result = await userManager.CreateAsync(user, password);
+            var result = await userManager.CreateAsync(user, Admin.Password);
 
             if (!result.Succeeded) 
                 return;
@@ -72,20 +69,19 @@ namespace Bike_EShop.Infrastructure.Data
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-            const string role = "Admin";
 
             //Admin Rol Toevoegen
-            var roleCheck = await roleManager.RoleExistsAsync(role);
+            var roleCheck = await roleManager.RoleExistsAsync(Admin.Role);
             if (!roleCheck) 
-                await roleManager.CreateAsync(new IdentityRole(role));
+                await roleManager.CreateAsync(new IdentityRole(Admin.Role));
 
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == Email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == Admin.Email);
 
             if (user == null) 
                 return;
 
             var roles = context.UserRoles;
-            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == role);
+            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == Admin.Email);
 
             if (adminRole == null) 
                 return;
