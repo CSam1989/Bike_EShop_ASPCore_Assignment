@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Bike_EShop.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bike_EShop.Infrastructure.Data
 {
@@ -30,21 +34,32 @@ namespace Bike_EShop.Infrastructure.Data
             context.SaveChanges();
         }
 
-        public static void SeedCustomer(ApplicationDbContext context)
+        public static void SeedAdmin(IServiceProvider serviceProvider)
         {
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
             context.Database.EnsureCreated();
 
-            if (context.Customers.Any())
-                return; //Als customers niet leeg is, dan moet de db niet geseed worden
+            if (context.Customers.Any(c => c.Name.ToLower() =="admin"))
+                return; //Als customers een admin bevat, dan moet de db niet geseed worden
 
-            var customerJson =
-                File.ReadAllText(
-                    "../Bike_EShop.Infrastructure/Data/customer.json");
+            var user = new ApplicationUser
+            {
+                UserName = "Admin",
+                Email = "Admin@Example.com",
+                Customer = new Customer
+                {
+                    FirstName = "",
+                    Name = "Admin"
+                }
+            };
+            const string password = "Admin123*";
 
-            var customer = JsonConvert.DeserializeObject<Customer>(customerJson);
+            var result = userManager.CreateAsync(user, password).Result;
 
-            context.Customers.Add(customer);
-
+            if (!result.Succeeded) return;
+            user.Customer.UserId = user.Id;
             context.SaveChanges();
         }
     }

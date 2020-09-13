@@ -1,5 +1,4 @@
 ﻿using Bike_EShop.Application.Common.Interfaces;
-using Bike_EShop.Infrastructure.Identity;
 using Bike_EShop.Infrastructure.Persistence;
 using Bike_EShop.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Bike_EShop.Domain.Identity;
 
 namespace Bike_EShop.Infrastructure.Extensions
 {
