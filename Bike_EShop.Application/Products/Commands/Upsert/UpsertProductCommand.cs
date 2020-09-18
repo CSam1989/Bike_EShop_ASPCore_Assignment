@@ -15,6 +15,7 @@ namespace Bike_EShop.Application.Products.Commands.Upsert
         public int? Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string BikeRegistrationNumber { get; set; }
 
         public class UpsertProductCommandHandler : IRequestHandler<UpsertProductCommand, int>
         {
@@ -43,6 +44,7 @@ namespace Bike_EShop.Application.Products.Commands.Upsert
 
                 entity.Name = request.Name.Trim();
                 entity.Price = request.Price;
+                entity.BikeRegistrationNumber = request.BikeRegistrationNumber.ToUpper().Trim();
 
                 await _context.SaveChangesAsync(cancellationToken);
 

@@ -9,6 +9,7 @@ namespace Bike_EShop.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string BikeRegistrationNumber { get; set; }
         public ICollection<ShoppingItem> ShoppingItems { get; set; }
     }
 }
