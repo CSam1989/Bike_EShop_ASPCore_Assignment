@@ -7,12 +7,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Bike_EShop.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bike_EShop.Infrastructure.Data
 {
     public static class DbInitializer
     {
-        public static void SeedProducts(ApplicationDbContext context)
+        public static async Task SeedProducts(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
 
@@ -27,25 +32,65 @@ namespace Bike_EShop.Infrastructure.Data
 
             foreach (var product in products) context.Products.Add(product);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public static void SeedCustomer(ApplicationDbContext context)
+        public static async Task SeedAdmin(IServiceProvider serviceProvider)
         {
-            context.Database.EnsureCreated();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
-            if (context.Customers.Any())
-                return; //Als customers niet leeg is, dan moet de db niet geseed worden
+            await context.Database.EnsureCreatedAsync();
 
-            var customerJson =
-                File.ReadAllText(
-                    "../Bike_EShop.Infrastructure/Data/customer.json");
+            if (await context.Customers.AnyAsync(x => string.Equals(x.Name, Admin.Name, StringComparison.CurrentCultureIgnoreCase)))
+                return; //Als customers een admin bevat, dan moet de db niet geseed worden
 
-            var customer = JsonConvert.DeserializeObject<Customer>(customerJson);
+            var user = new ApplicationUser
+            {
+                UserName = Admin.Name,
+                Email = Admin.Email,
+                Customer = new Customer
+                {
+                    FirstName = string.Empty,
+                    Name = Admin.Name
+                }
+            };
 
-            context.Customers.Add(customer);
+            var result = await userManager.CreateAsync(user, Admin.Password);
 
-            context.SaveChanges();
+            if (!result.Succeeded) 
+                return;
+
+            user.Customer.UserId = user.Id;
+            await context.SaveChangesAsync();
+        }
+
+        public static async Task SeedAdminRole(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+            //Admin Rol Toevoegen
+            var roleCheck = await roleManager.RoleExistsAsync(Admin.Role);
+            if (!roleCheck) 
+                await roleManager.CreateAsync(new IdentityRole(Admin.Role));
+
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == Admin.Email);
+
+            if (user == null) 
+                return;
+
+            var roles = context.UserRoles;
+            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == Admin.Role);
+
+            if (adminRole == null) 
+                return;
+
+            if (await roles.AnyAsync(ur => ur.UserId == user.Id && ur.RoleId == adminRole.Id)) 
+                return;
+
+            roles.Add(new IdentityUserRole<string> { UserId = user.Id, RoleId = adminRole.Id });
+            await context.SaveChangesAsync();
         }
     }
 }

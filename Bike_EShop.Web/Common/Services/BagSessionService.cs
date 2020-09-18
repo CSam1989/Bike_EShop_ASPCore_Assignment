@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Bike_EShop.Application.Customers.Queries.GetCustomerByUserId;
 
 namespace Bike_EShop.Web.Common.Services
 {
@@ -23,27 +25,44 @@ namespace Bike_EShop.Web.Common.Services
 
         public async Task<int> RetrieveBagIdFromSession()
         {
-            var bagId = _accessor.HttpContext.Session.GetObjectFromJson<string>("bagId");
+            if (BagIdExistsInSession())
+                return int.Parse(_getBadIdfromSession());
 
-            if (bagId is null)
-            {
-                var user = _accessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-                //CustomerId wordt nog aangepast van zodra Identity Authentication is ingevoerd
-                var id = await _mediator.Send(new CreateShoppingBagCommand 
-                { 
-                    CustomerId = 1
-                });
+            var bagId = await _createShoppingBag();
 
-                bagId = id.ToString();
-                _accessor.HttpContext.Session.SetObjectAsJson("bagId", bagId);
-            }
+            _accessor.HttpContext.Session.SetObjectAsJson("bagId", bagId);
 
             return int.Parse(bagId);
+        }
+
+        public bool BagIdExistsInSession()
+        {
+            return !(_getBadIdfromSession() is null);
         }
 
         public void ClearBag()
         {
             _accessor.HttpContext.Session.Clear();
+        }
+
+        private string _getBadIdfromSession()
+        {
+            return _accessor.HttpContext.Session.GetObjectFromJson<string>("bagId");
+        }
+
+        private async Task<string> _createShoppingBag()
+        {
+            var customer = await _mediator.Send(new GetCustomerByUserIdQuery
+            {
+                UserId = _accessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value
+            });
+
+            var id = await _mediator.Send(new CreateShoppingBagCommand
+            {
+                CustomerId = customer.Customer.Id
+            });
+
+            return id.ToString();
         }
     }
 }

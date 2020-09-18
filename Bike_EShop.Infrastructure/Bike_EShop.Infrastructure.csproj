@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200909095304_test.Designer.cs" />
     <Compile Remove="Migrations\20200911125007_AddingIdentity.cs" />
     <Compile Remove="Migrations\20200911125007_AddingIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200913114125_MovedFKCustomerUserRelationToCustomerTable.cs" />
+    <Compile Remove="Migrations\20200913114125_MovedFKCustomerUserRelationToCustomerTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

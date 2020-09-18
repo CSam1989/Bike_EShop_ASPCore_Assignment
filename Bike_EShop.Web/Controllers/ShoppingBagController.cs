@@ -19,10 +19,12 @@ namespace Bike_EShop.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await Mediator.Send(new GetShoppingBagByIdQuery 
-            { 
-                BagId = await _bagSession.RetrieveBagIdFromSession()
-            }));
+            if(_bagSession.BagIdExistsInSession())
+                return View(await Mediator.Send(new GetShoppingBagByIdQuery 
+                { 
+                    BagId = await _bagSession.RetrieveBagIdFromSession()
+                }));
+            return View();
         }
 
         public IActionResult Order()

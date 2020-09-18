@@ -7,7 +7,6 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Bike_EShop.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Domain.Entities;
+using Bike_EShop.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bike_EShop.Web.Areas.Identity.Pages.Account
@@ -104,6 +104,9 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    user.Customer.UserId = user.Id;
+                    await _context.SaveChangesAsync();
+
                     _logger.LogInformation("User created a new account with password.");
                     
                     await _signInManager.SignInAsync(user, isPersistent: false);

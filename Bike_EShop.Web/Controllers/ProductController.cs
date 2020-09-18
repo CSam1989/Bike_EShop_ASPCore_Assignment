@@ -9,6 +9,7 @@ using Bike_EShop.Application.Products.Commands.Upsert;
 using Bike_EShop.Application.Products.Queries.GetProductById;
 using Bike_EShop.Application.Products.Queries.GetProducts;
 using Bike_EShop.Domain.Entities;
+using Bike_EShop.Infrastructure.Data;
 using Bike_EShop.Web.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,7 @@ namespace Bike_EShop.Web.Controllers
 
         // GET: Admin/Product
         [HttpGet("Admin/Product")]
+        [Authorize(Roles = Admin.Role)]
         public async Task<IActionResult> AdminIndex(int? currentPage)
         {
             return View(await Mediator.Send(new GetProductsQuery()
@@ -53,12 +55,14 @@ namespace Bike_EShop.Web.Controllers
 
         // GET: Admin/Product/Create
         [HttpGet("Admin/Product/Create")]
+        [Authorize(Roles = Admin.Role)]
         public IActionResult Create()
         {
             return View(new UpsertProductCommand());
         }
 
         [HttpPost]
+        [Authorize(Roles = Admin.Role)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveCreate([Bind("Name,Price")] UpsertProductCommand command)
         {
@@ -73,6 +77,7 @@ namespace Bike_EShop.Web.Controllers
         
         // GET: Admin/Product/Update/1
         [HttpGet("Admin/Product/Update/{id}")]
+        [Authorize(Roles = Admin.Role)]
         public async Task<IActionResult> Update(int id)
         {
             var query = await Mediator.Send(new GetProductByIdQuery { Id = id });
@@ -85,6 +90,7 @@ namespace Bike_EShop.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Admin.Role)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveUpdate(int id, [Bind("Id,Name,Price")] UpsertProductCommand command)
         {
@@ -101,6 +107,7 @@ namespace Bike_EShop.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Admin.Role)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {

@@ -3,7 +3,7 @@
     ViewData["Title"] = "ShoppingBag";
 }
 
-@if (Model.Bag.Items.Count() == 0)
+@if (Model is null)
 {
     <h5>No products in shopping bag</h5>
 }
