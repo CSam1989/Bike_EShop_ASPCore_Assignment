@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -14,8 +15,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Bike_EShop.Application.Common.Interfaces;
+using Bike_EShop.Application.Customers.Commands.Create;
 using Bike_EShop.Domain.Entities;
 using Bike_EShop.Domain.Identity;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bike_EShop.Web.Areas.Identity.Pages.Account
@@ -27,25 +30,26 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IApplicationDbContext _context;
+        private readonly IMediator _mediator;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IApplicationDbContext context)
+            IApplicationDbContext context,
+            IMediator mediator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             this._context = context;
+            _mediator = mediator;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
-
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
         {
@@ -55,15 +59,11 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required] 
-            [MaxLength(20)] 
+            [MaxLength(20)]
             public string Username { get; set; }
 
-            [Required] 
-            [MaxLength(50)] 
             public string FirstName { get; set; }
 
-            [Required] 
-            [MaxLength(50)] 
             public string Name { get; set; }
 
             [Required]
@@ -81,42 +81,51 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            returnUrl ??= Url.Content("~/");
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var customer = new CreateCustomerCommand()
                 {
-                    UserName = Input.Username.Trim(),
-                    Email = Input.Email.Trim(),
-                    Customer = new Customer
-                    {
-                        FirstName = Input.FirstName.Trim(),
-                        Name = Input.Name.Trim()
-                    }
+                    FirstName = Input.FirstName,
+                    Name = Input.Name,
                 };
-                var result = await _userManager.CreateAsync(user, Input.Password);
 
-                if (result.Succeeded)
+                var validator = new CreateCustomerCommandValidator(_context).Validate(customer);
+
+                if (validator.IsValid)
                 {
-                    user.Customer.UserId = user.Id;
-                    await _context.SaveChangesAsync();
+                    var user = new ApplicationUser
+                    {
+                        UserName = Input.Username.Trim(),
+                        Email = Input.Email.Trim(),
+                    };
+                    var result = await _userManager.CreateAsync(user, Input.Password);
 
-                    _logger.LogInformation("User created a new account with password.");
-                    
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    if (result.Succeeded)
+                    {
+                        customer.UserId = user.Id;
+                        await _mediator.Send(customer);
+
+                        _logger.LogInformation("User created a new account with password.");
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(returnUrl);
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
 
-                
-                foreach (var error in result.Errors)
+                foreach (var error in validator.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
             }
 
