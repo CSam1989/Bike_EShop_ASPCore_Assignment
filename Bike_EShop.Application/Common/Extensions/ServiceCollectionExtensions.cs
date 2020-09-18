@@ -16,7 +16,11 @@ namespace Bike_EShop.Application.Common.Extensions
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IRandomGeneratorService, RandomGeneratorService>();
+            services.AddTransient<IDiscountService, DiscountService>();
+
+            //adding generic Interface
             services.AddTransient(typeof(IPaginationService<>), typeof(PaginationService<>));
+            
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());

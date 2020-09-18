@@ -53,6 +53,11 @@ else
                     <td></td>
                     <td></td>
                     <td>
+                        @if (Model.Bag.Discount > 0)
+                        {
+                            <h6 class="text-right">Subtotal: @Model.Bag.SubTotal.ToString("C")</h6>
+                            <h6 class="text-right">Discount: @Model.Bag.Discount.ToString("C")</h6>
+                        }
                         <h5 class="text-right">Total Price: @Model.Bag.TotalPrice.ToString("C")</h5>
                     </td>
                 </tr>
