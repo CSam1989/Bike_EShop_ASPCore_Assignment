@@ -40,9 +40,9 @@ namespace Bike_EShop.Infrastructure.Data
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            if (await context.Customers.AnyAsync(c => String.Equals(c.Name, Admin.Name, StringComparison.CurrentCultureIgnoreCase)))
+            if (await context.Customers.AnyAsync(x => string.Equals(x.Name, Admin.Name, StringComparison.CurrentCultureIgnoreCase)))
                 return; //Als customers een admin bevat, dan moet de db niet geseed worden
 
             var user = new ApplicationUser
@@ -81,7 +81,7 @@ namespace Bike_EShop.Infrastructure.Data
                 return;
 
             var roles = context.UserRoles;
-            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == Admin.Email);
+            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == Admin.Role);
 
             if (adminRole == null) 
                 return;
