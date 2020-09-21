@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Extensions;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Models;
+using Bike_EShop.Application.Common.Settings;
 using Bike_EShop.Infrastructure.Data;
 using Bike_EShop.Infrastructure.Extensions;
 using Bike_EShop.Web.Common.Services;
@@ -51,6 +52,9 @@ namespace Bike_EShop.Web
             //Reads discounts from appconfig file & passes it to IOC container
             var discountConfig = Configuration.GetSection("DiscountSettings").Get<DiscountList>();
             services.AddSingleton(discountConfig);
+
+            //Reads emailsettings from appconfig
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
