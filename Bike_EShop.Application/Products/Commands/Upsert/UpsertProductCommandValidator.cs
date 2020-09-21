@@ -16,6 +16,11 @@ namespace Bike_EShop.Application.Products.Commands.Upsert
             RuleFor(p => p.Price)
                 .GreaterThanOrEqualTo(0).WithMessage("Price can't be negative")
                 .NotNull().WithMessage("Price is required");
+
+            RuleFor(p => p.BikeRegistrationNumber)
+                .Length(8).WithMessage("Registrationnumber exactly 8 characters")
+                .NotEmpty().WithMessage("Registrationnumber is required")
+                .Must(number => number != null && number.ToUpper().StartsWith("ABC")).WithMessage("Registrationnumber starts with ABC");
         }
     }
 }

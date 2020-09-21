@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bike_EShop.Application.Common.Extensions;
 
 namespace Bike_EShop.Application.Shoppingbags.Queries.GetBagById
 {
@@ -20,11 +21,13 @@ namespace Bike_EShop.Application.Shoppingbags.Queries.GetBagById
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
+            private readonly IDiscountService _discount;
 
-            public GetShoppingBagByIdQueryHandler(IApplicationDbContext context, IMapper mapper)
+            public GetShoppingBagByIdQueryHandler(IApplicationDbContext context, IMapper mapper, IDiscountService discount)
             {
                 this._context = context;
                 this._mapper = mapper;
+                _discount = discount;
             }
 
             public async Task<ShoppingBagByIdVm> Handle(GetShoppingBagByIdQuery request, CancellationToken cancellationToken)
@@ -41,6 +44,11 @@ namespace Bike_EShop.Application.Shoppingbags.Queries.GetBagById
                     throw new NotFoundException(nameof(ShoppingBag), request.BagId);
 
                 vm.Bag = _mapper.Map<ShoppingBagByIdDto>(bag);
+
+                //apply discount
+                vm.Bag.SubTotal = vm.Bag.Items.CalculateTotalPrice();
+                vm.Bag.Discount = _discount.Calculate(bag);
+                vm.Bag.TotalPrice = vm.Bag.SubTotal - vm.Bag.Discount;
 
                 return vm;
             }

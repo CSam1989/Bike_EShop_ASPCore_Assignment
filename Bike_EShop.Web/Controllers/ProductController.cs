@@ -64,7 +64,7 @@ namespace Bike_EShop.Web.Controllers
         [HttpPost]
         [Authorize(Roles = Admin.Role)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveCreate([Bind("Name,Price")] UpsertProductCommand command)
+        public async Task<IActionResult> SaveCreate([Bind("Name,Price,BikeRegistrationNumber")] UpsertProductCommand command)
         {
             if (ModelState.IsValid)
             {
@@ -85,14 +85,15 @@ namespace Bike_EShop.Web.Controllers
             {
                 Id = query.Product.Id,
                 Name = query.Product.Name,
-                Price = query.Product.Price
+                Price = query.Product.Price,
+                BikeRegistrationNumber = query.Product.BikeRegistrationNumber
             });
         }
 
         [HttpPost]
         [Authorize(Roles = Admin.Role)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveUpdate(int id, [Bind("Id,Name,Price")] UpsertProductCommand command)
+        public async Task<IActionResult> SaveUpdate(int id, [Bind("Id,Name,Price,BikeRegistrationNumber")] UpsertProductCommand command)
         {
             if (id != command.Id)
                 return BadRequest();

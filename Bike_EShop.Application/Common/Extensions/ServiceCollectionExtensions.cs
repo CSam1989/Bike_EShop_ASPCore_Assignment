@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Bike_EShop.Application.Common.Factories;
 
 namespace Bike_EShop.Application.Common.Extensions
 {
@@ -16,7 +17,13 @@ namespace Bike_EShop.Application.Common.Extensions
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IRandomGeneratorService, RandomGeneratorService>();
+            services.AddTransient<IDiscountService, DiscountService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IMailFactory, MailFactory>();
+
+            //adding generic Interface
             services.AddTransient(typeof(IPaginationService<>), typeof(PaginationService<>));
+            
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());

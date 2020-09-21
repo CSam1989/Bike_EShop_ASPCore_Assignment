@@ -20,6 +20,11 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="BikeRegistrationNumber" class="control-label"></label>
+                <input asp-for="BikeRegistrationNumber" class="form-control" />
+                <span asp-validation-for="BikeRegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-secondary" />
                 <a asp-action="AdminIndex">Back to List</a>
             </div>

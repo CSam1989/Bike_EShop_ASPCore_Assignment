@@ -2,6 +2,7 @@
 using Bike_EShop.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Bike_EShop.Application.Common.Extensions
@@ -10,12 +11,7 @@ namespace Bike_EShop.Application.Common.Extensions
     {
         public static decimal CalculateTotalPrice(this IEnumerable<ShoppingItemsShoppingBagByIdDto> items)
         {
-            decimal totalPrice = 0M;
-            foreach (var item in items)
-            {
-                totalPrice += item.ItemSubTotal;
-            }
-            return totalPrice;
+            return items.Sum(item => item.ItemSubTotal);
         }
     }
 }

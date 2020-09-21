@@ -13,7 +13,9 @@ namespace Bike_EShop.Application.Shoppingbags.Queries.GetBagById
         public DateTime Date { get; set; }
         public CustomerShoppingBagByIdDto Customer { get; set; }
         public IEnumerable<ShoppingItemsShoppingBagByIdDto> Items { get; set; }
-        public decimal TotalPrice => Items.CalculateTotalPrice();
+        public decimal SubTotal { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TotalPrice { get; set; }
 
     }
 }

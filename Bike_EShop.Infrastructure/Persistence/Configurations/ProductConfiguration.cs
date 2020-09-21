@@ -19,6 +19,10 @@ namespace Bike_EShop.Infrastructure.Persistence.Configurations
             builder
                 .Property(p => p.Price)
                 .HasColumnType("decimal(12,2)");
+
+            builder
+                .Property(p => p.BikeRegistrationNumber)
+                .HasMaxLength(8);
         }
     }
 }
