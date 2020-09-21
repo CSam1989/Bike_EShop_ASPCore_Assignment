@@ -35,6 +35,7 @@ namespace Bike_EShop.Application.Shoppingbags.Queries.GetBagById
                 var vm = new ShoppingBagByIdVm();
 
                 var bag = await _context.ShoppingBags
+                                .Include(s => s.Customer)
                                 .Include(s => s.Items)
                                 .ThenInclude(i => i.Product)
                                 .FirstOrDefaultAsync(s => s.Id == request.BagId, cancellationToken);
