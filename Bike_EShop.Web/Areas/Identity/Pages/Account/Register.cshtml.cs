@@ -20,6 +20,7 @@ using Bike_EShop.Domain.Entities;
 using Bike_EShop.Domain.Identity;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using IEmailSender = Microsoft.AspNetCore.Identity.UI.Services.IEmailSender;
 
 namespace Bike_EShop.Web.Areas.Identity.Pages.Account
 {
@@ -31,19 +32,22 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IApplicationDbContext _context;
         private readonly IMediator _mediator;
+        private readonly IEmailService _emailService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IApplicationDbContext context,
-            IMediator mediator)
+            IMediator mediator,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             this._context = context;
             _mediator = mediator;
+            _emailService = emailService;
         }
 
         [BindProperty]
@@ -112,7 +116,8 @@ namespace Bike_EShop.Web.Areas.Identity.Pages.Account
                         await _mediator.Send(customer);
 
                         _logger.LogInformation("User created a new account with password.");
-
+                        await _emailService.SendEmailAsync($"{customer.FirstName} {customer.Name}",user.Email, "Thank you for registering",
+                            $"Thank you {customer.Name} {customer.FirstName} for registering");
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
