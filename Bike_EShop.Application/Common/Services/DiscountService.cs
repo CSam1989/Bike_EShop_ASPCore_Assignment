@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Models;
+using Bike_EShop.Application.Common.Settings;
 using Bike_EShop.Domain.Entities;
 
 namespace Bike_EShop.Application.Common.Services

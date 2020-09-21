@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Bike_EShop.Application.Common.Models
+﻿namespace Bike_EShop.Application.Common.Settings
 {
     public class DiscountList
     {
