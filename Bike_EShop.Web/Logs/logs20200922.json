@@ -1,0 +1,2 @@
+{"Timestamp":"2020-09-22T08:35:11.7482482+02:00","Level":"Information","MessageTemplate":"Application Starting.","Properties":{"MachineName":"SAM2016","ProcessId":13536,"ThreadId":1,"ApplicationName":"Bike_EShop"}}
+{"Timestamp":"2020-09-22T08:37:29.0596532+02:00","Level":"Information","MessageTemplate":"Application Starting.","Properties":{"MachineName":"SAM2016","ProcessId":11676,"ThreadId":1,"ApplicationName":"Bike_EShop"}}

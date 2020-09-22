@@ -42,7 +42,7 @@ namespace Bike_EShop.Infrastructure.Data
 
             await context.Database.EnsureCreatedAsync();
 
-            if (await context.Customers.AnyAsync(x => string.Equals(x.Name, Admin.Name, StringComparison.CurrentCultureIgnoreCase)))
+            if (await context.Customers.AnyAsync(x => x.Name.ToLower() == Admin.Name.ToLower()))
                 return; //Als customers een admin bevat, dan moet de db niet geseed worden
 
             var user = new ApplicationUser
