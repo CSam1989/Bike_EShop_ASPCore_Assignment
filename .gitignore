@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Log files
-[Ll]ogs/
+Bike_EShop.Web/[Ll]ogs/
 
 # User-specific files
 *.rsuser

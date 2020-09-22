@@ -9,15 +9,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Bike_EShop.Domain.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace Bike_EShop.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
+        private readonly ILogger<ApplicationDbContext> _logger;
+
         public ApplicationDbContext(
-            DbContextOptions options)
+            DbContextOptions options, ILogger<ApplicationDbContext> logger)
             : base(options)
         {
+            _logger = logger;
         }
 
         public DbSet<Product> Products { get; set; }
@@ -27,7 +31,15 @@ namespace Bike_EShop.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            return await base.SaveChangesAsync(cancellationToken);
+            try
+            {
+                return await base.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Something went wrong with saving data to the database"); 
+                throw;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
