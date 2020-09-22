@@ -15,14 +15,10 @@ namespace Bike_EShop.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
-        private readonly ILogger<ApplicationDbContext> _logger;
-
         public ApplicationDbContext(
-            DbContextOptions options, ILogger<ApplicationDbContext> logger)
+            DbContextOptions options)
             : base(options)
-        {
-            _logger = logger;
-        }
+        {}
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingItem> ShoppingItems { get; set; }
@@ -31,15 +27,7 @@ namespace Bike_EShop.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            try
-            {
-                return await base.SaveChangesAsync(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Something went wrong with saving data to the database"); 
-                throw;
-            }
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
