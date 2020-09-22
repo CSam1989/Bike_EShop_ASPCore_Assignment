@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bike_EShop.Application.Common.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -21,11 +22,19 @@ namespace Bike_EShop.Application.Common.Behaviours
             //Request
             _logger.LogInformation($"Handling {typeof(TRequest).Name}");
 
-            var response = await next();
+            try
+            {
+                var response = await next();
 
-            //Response
-            _logger.LogInformation($"Handled {typeof(TResponse).Name}");
-            return response;
+                //Response
+                _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+                return response;
+            }
+            catch (NotFoundException e)
+            {
+                _logger.LogWarning(e, "Requestparamater is not found");
+                throw;
+            }
         }
     }
 }

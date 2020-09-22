@@ -35,7 +35,7 @@ namespace Bike_EShop.Application.Common.Services
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"unexpected error occurred when trying to send an email to {email}");
+                _logger.LogWarning(e, $"unexpected error occurred when trying to send an email to {email}");
                 throw;
             }
             
