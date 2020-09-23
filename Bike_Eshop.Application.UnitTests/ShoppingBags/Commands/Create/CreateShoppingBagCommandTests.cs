@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Interfaces;
@@ -9,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Bike_Eshop.Application.UnitTests.ShoppingBags.Create
+namespace Bike_Eshop.Application.UnitTests.ShoppingBags.Commands.Create
 {
     public class CreateShoppingBagCommandTests: CommandTestBase
     {

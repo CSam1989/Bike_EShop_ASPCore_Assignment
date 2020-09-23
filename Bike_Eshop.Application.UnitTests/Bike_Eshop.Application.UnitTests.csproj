@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Bike_EShop.Infrastructure\Bike_EShop.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ShoppingBags\Queries\" />
+  </ItemGroup>
+
 </Project>
