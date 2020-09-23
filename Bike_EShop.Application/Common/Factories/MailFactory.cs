@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Settings;
@@ -9,6 +10,7 @@ using MimeKit;
 
 namespace Bike_EShop.Application.Common.Factories
 {
+    [ExcludeFromCodeCoverage]
     public class MailFactory : IMailFactory
     {
         private readonly EmailSettings _settings;
