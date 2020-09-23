@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Bike_EShop.Application.Customers.Commands.Create;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Bike_Eshop.Application.UnitTests.Customers.Create
+namespace Bike_Eshop.Application.UnitTests.Customers.Commands.Create
 {
     public class CreateCustomerCommandValidatorTests : CommandTestBase
     {

@@ -30,9 +30,10 @@ namespace Bike_EShop.Application.Customers.Commands.Create
         {
             if (c.FirstName is null)
                 return _context.Customers.Any(customer =>
-                    customer.Name.ToLower() == c.Name.Trim().ToLower());
+                    c.Name != null && customer.Name.ToLower() == c.Name.Trim().ToLower());
 
             return _context.Customers.Any(customer =>
+                c.Name != null && 
                customer.Name.ToLower() == c.Name.Trim().ToLower() &&
                 customer.FirstName.ToLower() == c.FirstName.Trim().ToLower());
         }

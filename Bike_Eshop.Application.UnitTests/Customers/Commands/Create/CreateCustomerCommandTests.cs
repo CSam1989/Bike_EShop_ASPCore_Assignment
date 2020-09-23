@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Customers.Commands.Create;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Bike_Eshop.Application.UnitTests.Customers.Create
+namespace Bike_Eshop.Application.UnitTests.Customers.Commands.Create
 {
     public class CreateCustomerCommandTests : CommandTestBase
     {
