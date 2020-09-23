@@ -35,7 +35,7 @@ namespace Bike_EShop.Application.Customers.Commands.Create
 
                 _context.Customers.Add(entity);
                 await _context.SaveChangesAsync(cancellationToken);
-
+                
                 return entity.Id;
             }
         }

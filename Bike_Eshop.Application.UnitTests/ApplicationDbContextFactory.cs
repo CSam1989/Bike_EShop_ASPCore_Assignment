@@ -33,6 +33,11 @@ namespace Bike_Eshop.Application.UnitTests
                 new Product() {Id = 2, Name = "Bike2", Price = 200, BikeRegistrationNumber = "B2"},
                 new Product() {Id = 3, Name = "Bike3", Price = 300, BikeRegistrationNumber = "C3"});
 
+            context.Customers.Add(new Customer()
+            {
+                Name = "Test", FirstName = "User", UserId = "000-000-000"
+            });
+
             context.SaveChanges();
         }
 
