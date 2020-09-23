@@ -35,8 +35,29 @@ namespace Bike_Eshop.Application.UnitTests
 
             context.Customers.Add(new Customer()
             {
-                Name = "Test", FirstName = "User", UserId = "000-000-000"
+                Id = 1, Name = "Test", FirstName = "User", UserId = "000-000-000"
             });
+
+            context.ShoppingBags.Add(
+                new ShoppingBag()
+                {
+                    Id = 1,
+                    CustomerId = 1,
+                    Date = new DateTime(2020, 9, 22),
+                });
+
+            context.ShoppingItems.AddRange(
+                new ShoppingItem()
+                {
+                    ProductId = 1,
+                    ShoppingBagId = 1,
+                    Quantity = 1
+                }, new ShoppingItem()
+                {
+                    ProductId = 2,
+                    ShoppingBagId = 1,
+                    Quantity = 2
+                });
 
             context.SaveChanges();
         }
