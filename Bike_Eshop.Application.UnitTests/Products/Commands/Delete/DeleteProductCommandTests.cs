@@ -21,7 +21,7 @@ namespace Bike_Eshop.Application.UnitTests.Products.Commands.Delete
         }
 
         [Test]
-        public async Task Handle_GivenValidId_ShouldRemovePersistedTodoItem()
+        public async Task Handle_GivenValidId_ShouldRemovePersistedProduct()
         {
             var command = new DeleteProductCommand()
             {
