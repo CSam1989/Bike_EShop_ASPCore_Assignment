@@ -41,7 +41,7 @@ namespace Bike_Eshop.Application.UnitTests.Common.Services
         [TestCase(100,5, 0)]
         [TestCase(100,10, 100)]
         [TestCase(100,20, 400)]
-        public void WhenCalculatingDiscount_Given10items_ShouldReturn10PercentDiscount(decimal itemprice, int itemcount, decimal discount)
+        public void WhenCalculatingDiscount_GivenAnItemCount_ShouldReturnTheCorrectDiscount(decimal itemprice, int itemcount, decimal discount)
         {
             _shoppingBag.Items.Add(new ShoppingItem()
             {
