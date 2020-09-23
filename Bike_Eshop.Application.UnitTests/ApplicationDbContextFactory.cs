@@ -31,7 +31,7 @@ namespace Bike_Eshop.Application.UnitTests
             context.Products.AddRange(
                 new Product() {Id = 1, Name = "Bike1", Price = 100, BikeRegistrationNumber = "A1"},
                 new Product() {Id = 2, Name = "Bike2", Price = 200, BikeRegistrationNumber = "B2"},
-                new Product() {Id = 1, Name = "Bike1", Price = 100, BikeRegistrationNumber = "C3"});
+                new Product() {Id = 3, Name = "Bike3", Price = 300, BikeRegistrationNumber = "C3"});
 
             context.SaveChanges();
         }
