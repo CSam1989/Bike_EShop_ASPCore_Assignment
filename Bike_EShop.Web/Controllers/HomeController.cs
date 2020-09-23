@@ -32,7 +32,7 @@ namespace Bike_EShop.Web.Controllers
         {
             var vm = new HomeIndexViewModel()
             {
-                RandomNr = _randomGenerator.GenerateRandomNumber(_bikeCount.Count())
+                RandomNr = _randomGenerator.GenerateRandomPositiveNumber(_bikeCount.Count())
             };
 
             return View(vm);

@@ -2,6 +2,6 @@
 {
     public interface IRandomGeneratorService
     {
-        int GenerateRandomNumber(int upperBound);
+        int GenerateRandomPositiveNumber(int upperBound);
     }
 }
