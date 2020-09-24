@@ -5,6 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200909095304_test.cs" />
+    <Compile Remove="Migrations\20200909095304_test.Designer.cs" />
+    <Compile Remove="Migrations\20200911125007_AddingIdentity.cs" />
+    <Compile Remove="Migrations\20200911125007_AddingIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200913114125_MovedFKCustomerUserRelationToCustomerTable.cs" />
+    <Compile Remove="Migrations\20200913114125_MovedFKCustomerUserRelationToCustomerTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bike_EShop.Application\Bike_EShop.Application.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,19 @@
+﻿@model Bike_EShop.Application.Products.Queries.GetProducts.ProductsVM
+@{
+    ViewData["Title"] = "Overview";
+}
+
+<partial name="_Pagination" model="@Model.Pagination" />
+
+<div class="row">
+    @if (Model.List.Count() == 0)
+    {
+        <h5>No products</h5>
+    }
+
+    @foreach (var product in Model.List)
+    {
+        <p-card id="product.Id" name="@product.Name" price="product.Price" bike-nr="product.BikeNr"></p-card>
+    }
+</div>
+

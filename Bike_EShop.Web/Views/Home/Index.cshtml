@@ -1,8 +1,16 @@
-﻿@{
+﻿@model Bike_EShop.Web.Models.Home.HomeIndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
     Layout = "_LandingPageLayout";
 }
 
-<div class="vertical-align text-center">
-    <bike-img random-nr="2"></bike-img>
+<div class="d-flex flex-column w-100">
+    <header>
+        <h1 class="text-center">Sam's Bikeshop</h1>
+    </header>
+    <div class="bike-img text-center">
+        <a asp-controller="Product" asp-action="Index">
+            <bike-img bike-id="@Model.RandomNr"></bike-img>
+        </a>
+    </div>
 </div>

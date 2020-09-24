@@ -5,13 +5,19 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bike_EShop.Web", "Bike_EShop.Web\Bike_EShop.Web.csproj", "{12517FD0-B462-4732-B41C-51CFFBF0D327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bik_EShop.Domain", "Bik_EShop.Domain\Bik_EShop.Domain.csproj", "{7A62497A-7D21-4E98-AEBA-92FC329BAFBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bike_EShop.Application", "Bike_EShop.Application\Bike_EShop.Application.csproj", "{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bike_EShop.Application", "Bike_EShop.Application\Bike_EShop.Application.csproj", "{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bike_EShop.TagHelpers", "Bike.EShop.TagHelpers\Bike_EShop.TagHelpers.csproj", "{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bike_EShop.Infrastructure", "Bike_EShop.Infrastructure\Bike_EShop.Infrastructure.csproj", "{8D09826E-392A-4D74-997D-8FAE159553BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bike_EShop.Domain", "Bike_EShop.Domain\Bike_EShop.Domain.csproj", "{DB31FB72-39CF-4CFE-A9CF-12857851AF85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bike.EShop.TagHelpers", "Bike.EShop.TagHelpers\Bike.EShop.TagHelpers.csproj", "{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bike_EShop.Infrastructure", "Bike_EShop.Infrastructure\Bike_EShop.Infrastructure.csproj", "{42DEFFFA-FEA5-4523-9F9C-C687194299A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{CF21204D-6708-4236-B24A-7B569BF4DF0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A053CD0B-F4DB-43DF-998D-AACC1778E8FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bike_Eshop.Application.UnitTests", "Bike_Eshop.Application.UnitTests\Bike_Eshop.Application.UnitTests.csproj", "{CEFEB56B-F6CD-42C1-9012-C55293011248}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,25 +29,37 @@ Global
 		{12517FD0-B462-4732-B41C-51CFFBF0D327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12517FD0-B462-4732-B41C-51CFFBF0D327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12517FD0-B462-4732-B41C-51CFFBF0D327}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A62497A-7D21-4E98-AEBA-92FC329BAFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A62497A-7D21-4E98-AEBA-92FC329BAFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A62497A-7D21-4E98-AEBA-92FC329BAFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A62497A-7D21-4E98-AEBA-92FC329BAFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D824BB59-D2C0-495D-AD4F-9B47C8D5A830}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D09826E-392A-4D74-997D-8FAE159553BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D09826E-392A-4D74-997D-8FAE159553BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D09826E-392A-4D74-997D-8FAE159553BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D09826E-392A-4D74-997D-8FAE159553BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB31FB72-39CF-4CFE-A9CF-12857851AF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB31FB72-39CF-4CFE-A9CF-12857851AF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB31FB72-39CF-4CFE-A9CF-12857851AF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB31FB72-39CF-4CFE-A9CF-12857851AF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42DEFFFA-FEA5-4523-9F9C-C687194299A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42DEFFFA-FEA5-4523-9F9C-C687194299A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42DEFFFA-FEA5-4523-9F9C-C687194299A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42DEFFFA-FEA5-4523-9F9C-C687194299A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEFEB56B-F6CD-42C1-9012-C55293011248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEFEB56B-F6CD-42C1-9012-C55293011248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEFEB56B-F6CD-42C1-9012-C55293011248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEFEB56B-F6CD-42C1-9012-C55293011248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12517FD0-B462-4732-B41C-51CFFBF0D327} = {CF21204D-6708-4236-B24A-7B569BF4DF0E}
+		{D824BB59-D2C0-495D-AD4F-9B47C8D5A830} = {CF21204D-6708-4236-B24A-7B569BF4DF0E}
+		{5D588CF1-5E38-4A66-ACEC-670C4DAC3FCB} = {CF21204D-6708-4236-B24A-7B569BF4DF0E}
+		{DB31FB72-39CF-4CFE-A9CF-12857851AF85} = {CF21204D-6708-4236-B24A-7B569BF4DF0E}
+		{42DEFFFA-FEA5-4523-9F9C-C687194299A8} = {CF21204D-6708-4236-B24A-7B569BF4DF0E}
+		{CEFEB56B-F6CD-42C1-9012-C55293011248} = {A053CD0B-F4DB-43DF-998D-AACC1778E8FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C311F4CF-82F5-4E75-A228-F4D47B378ED0}

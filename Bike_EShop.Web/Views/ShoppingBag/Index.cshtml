@@ -1,0 +1,72 @@
+﻿@model Bike_EShop.Application.Shoppingbags.Queries.GetBagById.ShoppingBagByIdVm;
+@{
+    ViewData["Title"] = "ShoppingBag";
+}
+
+@if (Model is null)
+{
+    <h5>No products in shopping bag</h5>
+}
+else
+{
+    <div class="row">
+        <table class="table table-striped col-lg-8">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(s => s.Bag.Items.First().Product.Name)
+                    </th>
+                    <th scope="col" class="text-center">
+                        Unit Price
+                    </th>
+                    <th scope="col" class="text-center">
+                        @Html.DisplayNameFor(s => s.Bag.Items.First().Quantity)
+                    </th>
+                    <th scope="col" class="text-right">
+                        Total price per item
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Bag.Items)
+                {
+                    <tr>
+
+                        <td>
+                            @(item.Product.Name)
+                        </td>
+                        <td class="text-center">
+                            @(item.Product.Price.ToString("C"))
+                        </td>
+                        <td class="text-center">
+                            @(item.Quantity)
+                        </td>
+                        <td class="text-right">
+                            @(item.ItemSubTotal.ToString("C"))
+                        </td>
+                    </tr>
+}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        @if (Model.Bag.Discount > 0)
+                        {
+                            <h6 class="text-right">Subtotal: @Model.Bag.SubTotal.ToString("C")</h6>
+                            <h6 class="text-right">Discount: @Model.Bag.Discount.ToString("C")</h6>
+                        }
+                        <h5 class="text-right">Total Price: @Model.Bag.TotalPrice.ToString("C")</h5>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="w-100"></div>
+        <div>
+            <a asp-controller="ShoppingBag" asp-action="Order" class="btn btn-secondary">Order</a>
+            <a asp-controller="Product" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+}
