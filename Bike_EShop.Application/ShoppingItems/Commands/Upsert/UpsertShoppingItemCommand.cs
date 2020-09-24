@@ -16,11 +16,11 @@ namespace Bike_EShop.Application.ShoppingItems.Commands.Create
         public int BagId { get; set; }
         public int Quantity { get; set; }
 
-        public class UpsertShoppingBagCommandHandler : IRequestHandler<UpsertShoppingItemCommand, int>
+        public class UpsertShoppingItemCommandHandler : IRequestHandler<UpsertShoppingItemCommand, int>
         {
             private readonly IApplicationDbContext _context;
 
-            public UpsertShoppingBagCommandHandler(IApplicationDbContext context)
+            public UpsertShoppingItemCommandHandler(IApplicationDbContext context)
             {
                 this._context = context;
             }

@@ -61,7 +61,7 @@ namespace Bike_EShop.Application.Products.Queries.GetProducts
 
                 foreach (var product in vm.List)
                 {
-                    product.BikeNr = _randomGenerator.GenerateRandomNumber(_bikeCount.Count());
+                    product.BikeNr = _randomGenerator.GenerateRandomPositiveNumber(_bikeCount.Count());
                 }
 
                 return vm;

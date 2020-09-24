@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Bike_EShop.Application.Common.Interfaces;
 using Bike_EShop.Application.Common.Settings;
@@ -9,6 +10,8 @@ using MimeKit;
 
 namespace Bike_EShop.Application.Common.Services
 {
+    //This is an external service, so its not a unit test
+    [ExcludeFromCodeCoverage]
     public class EmailService: IEmailService
     {
         private readonly IMailFactory _mailFactory;

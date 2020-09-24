@@ -7,7 +7,7 @@ namespace Bike_EShop.Application.Common.Services
 {
     public class RandomGeneratorService : IRandomGeneratorService
     {
-        public int GenerateRandomNumber(int upperBound)
+        public int GenerateRandomPositiveNumber(int upperBound)
         {
             var random = new Random();
             return random.Next(1, upperBound + 1);

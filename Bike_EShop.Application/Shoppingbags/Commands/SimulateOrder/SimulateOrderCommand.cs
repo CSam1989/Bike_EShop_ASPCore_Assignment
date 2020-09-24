@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Bike_EShop.Application.Shoppingbags.Commands.SimulateOrder
 {
+    [ExcludeFromCodeCoverage] //Its a simulation => no unit testing needed
     public class SimulateOrderCommand: IRequest
     {
         public class SimulateOrderCommandHandler: IRequestHandler<SimulateOrderCommand>
